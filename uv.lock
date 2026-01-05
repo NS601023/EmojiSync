@@ -815,25 +815,27 @@ name = "emojisync"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "notebook" },
     { name = "opencv-python" },
     { name = "py-feat" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "notebook" },
     { name = "ruff" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "notebook", specifier = ">=7.5.1" },
     { name = "opencv-python", specifier = ">=4.8.1.78" },
     { name = "py-feat", specifier = ">=0.6.2" },
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "ruff", specifier = ">=0.14.10" }]
+dev = [
+    { name = "notebook", specifier = ">=7.5.1" },
+    { name = "ruff", specifier = ">=0.14.10" },
+]
 
 [[package]]
 name = "exceptiongroup"
