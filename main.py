@@ -2,7 +2,7 @@ import logging
 
 import cv2
 
-from src.camera import Camera
+from src.camera import Camera, CameraConfig
 from src.detector import DetectorConfig, EmotionDetector
 
 
@@ -10,9 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    input_device_num = 0  # TODO: Replace this with an input from cli
-    cap = cv2.VideoCapture(input_device_num, cv2.CAP_DSHOW)
-    input_device = Camera(cap, 1)
+    input_device_conf = CameraConfig(device_name="WEBCAM")
+    input_device = Camera(input_device_conf)
     detector_conf = DetectorConfig()
     detector = EmotionDetector(detector_conf)
     indx: int = 0
