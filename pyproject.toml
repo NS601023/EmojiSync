@@ -6,7 +6,6 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "opencv-python>=4.8.1.78",
-    "pillow>=10.3.0",
     "py-feat>=0.6.2",
 ]
 
