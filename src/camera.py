@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class CameraConfig:
-    fps: int = 1
+    fps: float = 1
     input_device_num: int = 0
     cap: cv2.VideoCapture = cv2.VideoCapture(input_device_num, cv2.CAP_DSHOW)
     cap_prop_frame_width: int = 640
