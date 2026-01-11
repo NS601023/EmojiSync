@@ -4,24 +4,33 @@ import cv2
 
 from src.camera import Camera, CameraConfig
 from src.detector import DetectorConfig, EmotionDetector
+from src.emotion_viewer import EmotionViewer, ViewerConfig
 
 
 logger = logging.getLogger(__name__)
 
 
 def main():
-    input_device_conf = CameraConfig(device_name="WEBCAM")
+    input_device_conf = CameraConfig(device_name="WEBCAM", fps=1.25)
     input_device = Camera(input_device_conf)
     detector_conf = DetectorConfig()
     detector = EmotionDetector(detector_conf)
-    indx: int = 0
+    viewer_conf = ViewerConfig(font_size=96)
+    viewer = EmotionViewer(viewer_conf)
+    # indx: int = 0
     for frame in input_device.frames():
         extracted_emo = detector.frame_emotion(frame)
-        print(f"Emotion: {extracted_emo}")
-        print(f"Estimated status: {max(extracted_emo, key=extracted_emo.get)}")
-        if indx > 60:
+        label = max(extracted_emo, key=extracted_emo.get)
+        if extracted_emo[label]==0.0:
+            label="neutral"
+        # print(f"Emotion: {extracted_emo}")
+        # print(f"Estimated status: {label}")
+        if not viewer.show(label):
             break
-        indx = indx + 1
+        # if indx > 60:
+        #     break
+        # indx = indx + 1
+    viewer.close()
 
     # test
     # import os
