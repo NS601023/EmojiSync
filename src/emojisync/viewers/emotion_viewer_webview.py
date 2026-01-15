@@ -15,7 +15,7 @@ class ViewerConfig:
     font_family: str | None = None
     font_size: int = 96
     text_color: Tuple[int, int, int] = (255, 255, 255)
-    background_color: Tuple[int, int, int] = (0, 0, 0)
+    background_color: Tuple[int, int, int] = (0, 0, 255)
     padding: int = 12
     poll_ms: int = 50
 
