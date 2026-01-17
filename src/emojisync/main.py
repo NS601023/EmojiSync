@@ -4,10 +4,12 @@ import threading
 from devices import Camera, CameraConfig
 from detectors import DetectorConfig, EmotionDetector
 from viewers.viewer_protocol import Viewer
+from streamingstatus.bsky import update_live_status
 
-VIEWER_BACKEND = "web"   # "tk" or "web"
+VIEWER_BACKEND = "web"  # "tk" or "web"
 
 logger = logging.getLogger(__name__)
+
 
 def camera_loop(viewer: Viewer, stop: threading.Event) -> None:
     input_device_conf = CameraConfig(device_name="WEBCAM", fps=2)
@@ -25,7 +27,17 @@ def camera_loop(viewer: Viewer, stop: threading.Event) -> None:
 
         viewer.push(label)
 
+
 def main() -> None:
+    # 環境変数にlogin情報があればステータス更新
+    update_live_status(
+        thumb_image_path="path_to_image",
+        twitch_user_name="username",
+        title='title',
+        description='desc',
+        duration_minutes=60,
+    )
+
     stop = threading.Event()
 
     if VIEWER_BACKEND == "tk":
@@ -45,6 +57,7 @@ def main() -> None:
     finally:
         stop.set()
         viewer.close()
+
 
 if __name__ == "__main__":
     main()

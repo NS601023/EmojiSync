@@ -10,6 +10,11 @@ dependencies = [
     "pywebview>=6.1",
 ]
 
+[project.optional-dependencies]
+bsky = [
+    "atproto>=0.0.65",
+]
+
 [dependency-groups]
 dev = [
     "notebook>=7.5.1",
