@@ -1,6 +1,7 @@
 # src/camera.py
 import logging
 import time
+import sys
 from dataclasses import dataclass
 from typing import Union, Any, Generator, Optional
 
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 class CameraConfig:
     fps: float = 1
     input_device_num: int = 0
-    cap: cv2.VideoCapture = cv2.VideoCapture(input_device_num, cv2.CAP_DSHOW)
+    cap: cv2.VideoCapture = cv2.VideoCapture(input_device_num, cv2.CAP_DSHOW if sys.platform == "win32" else None)
     cap_prop_frame_width: int = 640
     cap_prop_frame_height: int = 480
     device_name: Optional[str] = None
